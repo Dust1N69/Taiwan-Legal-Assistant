@@ -5,18 +5,16 @@ from pathlib import Path
 from typing import List, Dict
 import logging
 
-# 設置日誌
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-# 定義文件類別
 DOCUMENT_CATEGORIES = {
     "house_contract": "房屋契約",
     "vehicle": "車輛買賣/租賃",
     "labor": "勞動契約",
     "loan": "借貸契約",
     "service": "服務契約",
-    "real_estate": "不動產建案/預售"
+    "real_estate": "不動產相關"
 }
 
 class DocumentProcessor:
@@ -48,8 +46,7 @@ class DocumentProcessor:
     def process_document(self, file_path: Path, category: str) -> Dict:
         """處理單個文件並返回結構化數據"""
         text = self.extract_text_from_pdf(file_path)
-        
-        # 創建文件元數據
+
         doc_data = {
             "file_name": file_path.name,
             "category": category,
