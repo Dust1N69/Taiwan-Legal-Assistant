@@ -7,7 +7,6 @@ import logging
 from llama_cpp import Llama
 from rag_processor import RAGProcessor
 
-# 設置日誌
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -82,12 +81,10 @@ class ChatInterface:
         # 獲取對話歷史
         history = self.memory.get_conversation_history(conversation_id)
         
-        # 如果是新對話且有系統提示，添加系統提示
         if not history and system_prompt:
             self.memory.add_conversation(conversation_id, "system", system_prompt)
             history = self.memory.get_conversation_history(conversation_id)
         
-        # 如果啟用了RAG，使用RAG處理器增強提示
         if self.rag:
             try:
                 enhanced_prompt = self.rag.process_query(user_input)
