@@ -1,8 +1,3 @@
-"""
-此程序需要使用llama-cpp-python 0.3.0或更高版本來支持Llama 3.2模型。
-如果遇到模型載入錯誤，請確保已安裝正確版本：
-pip install llama-cpp-python==0.3.0 --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu
-"""
 
 import os
 import sys
@@ -12,16 +7,16 @@ from llama_cpp import Llama
 import logging
 from rag_processor import RAGProcessor
 
-# 設置日誌
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-# 模型配置
+
 MODEL_ID = "QuantFactory/Llama-3.2-Taiwan-Legal-3B-Instruct-GGUF"
 MODEL_FILENAME = "Llama-3.2-Taiwan-Legal-3B-Instruct.Q4_K_M.gguf"
 MODEL_PATH = os.path.join(os.getcwd(), MODEL_FILENAME)
 
-# 初始化RAG處理器
+# 初始化RAG
 try:
     rag_processor = RAGProcessor("processed_documents")
     USE_RAG = True
@@ -44,7 +39,6 @@ def check_model_in_cache():
         logger.error(f"檢查緩存時發生錯誤: {e}")
         return None
 
-# 下載模型（如果尚未下載）
 def download_model():
     if os.path.exists(MODEL_PATH):
         logger.info(f"模型已存在於本地路徑: {MODEL_PATH}")
@@ -68,8 +62,7 @@ def download_model():
     except Exception as e:
         logger.error(f"下載模型時發生錯誤: {e}")
         raise
-
-# 初始化模型
+        
 def init_model(model_path):
     try:
         logger.info("正在載入模型...")
@@ -119,25 +112,7 @@ def generate_response(model, prompt, system_prompt, temperature, max_tokens, top
         logger.error(f"生成回應時發生錯誤: {e}")
         return f"生成回應時發生錯誤: {str(e)}"
 
-# 主函數
 def main():
-    # 檢查llama-cpp-python版本
-    try:
-        import llama_cpp
-        version = llama_cpp.__version__
-        version_parts = version.split('.')
-        major, minor = int(version_parts[0]), int(version_parts[1])
-        if major == 0 and minor < 3:
-            logger.warning(f"當前llama-cpp-python版本為{version}，但Llama 3.2模型需要0.3.0或更高版本")
-            logger.warning("請使用以下命令安裝兼容版本：")
-            logger.warning("pip install llama-cpp-python==0.3.0 --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu")
-            print(f"當前llama-cpp-python版本為{version}，但Llama 3.2模型需要0.3.0或更高版本")
-            print("請使用以下命令安裝兼容版本：")
-            print("pip install llama-cpp-python==0.3.0 --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu")
-            sys.exit(1)
-    except (ImportError, AttributeError):
-        logger.warning("無法檢查llama-cpp-python版本")
-    
     # 下載並初始化模型
     try:
         model_path = download_model()
@@ -175,10 +150,6 @@ def main():
                     gr.Markdown("### 提示詞範例")
                     with gr.Accordion("法律顧問", open=False):
                         gr.Markdown("你是一個專業的台灣法律顧問，請根據台灣法律提供專業建議。")
-                    with gr.Accordion("法條解釋", open=False):
-                        gr.Markdown("你是一個台灣法條解釋專家，請解釋相關法條的含義和適用範圍。")
-                    with gr.Accordion("案例分析", open=False):
-                        gr.Markdown("你是一個法律案例分析專家，請分析這個案例的法律要點和可能的判決結果。")
             
             # 處理對話
             def respond(message, chat_history, system_prompt, temperature, max_tokens, top_p, frequency_penalty, presence_penalty):
