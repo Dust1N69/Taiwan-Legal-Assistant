@@ -11,8 +11,9 @@
 
 系統需求
 - Python 3.8 或更高版本
-- 足夠的硬碟空間（用於模型和文件存儲）
-- 建議至少8GB RAM
+- 至少10G儲存空間
+- 建議至少16GB RAM
+- 建議至少16GB GPU RAM
   
 準備文件
 - 在`document_processor.py`的input_dir(自訂)目錄下創建以下子目錄：
