@@ -15,7 +15,7 @@
 - 建議至少8GB RAM
   
 ##準備文件
-- 在document_processor.py的input_dir(自訂)目錄下創建以下子目錄：
+- 在`document_processor.py`的input_dir(自訂)目錄下創建以下子目錄：
     - house_contract（房屋契約）
     - vehicle（車輛買賣/租賃）
     - labor（勞動契約）
