@@ -23,7 +23,7 @@
     - loan（借貸契約）
     - service（服務契約）
     - real_estate（不動產）
-  將相應的PDF文件放入對應目錄
+將相應的PDF文件放入對應目錄
 
 系統提示詞
 可以在`chat_interface.py`中修改`SYSTEM_PROMPTS`字典來自定義不同的專家模式。
