@@ -9,12 +9,6 @@
 - 多種專業模式（法律顧問、法條解釋、案例分析）
 - 支援PDF文件處理和分類
 
-系統需求
-- Python 3.8 或更高版本
-- 至少10G儲存空間
-- 建議至少16GB RAM
-- 建議至少16GB GPU RAM
-  
 準備文件
 - 在`document_processor.py`的input_dir(自訂)目錄下創建以下子目錄，將相應的PDF文件放入對應目錄：
     - house_contract（房屋契約）
@@ -23,7 +17,6 @@
     - loan（借貸契約）
     - service（服務契約）
     - real_estate（不動產）
-
 
 系統提示詞
 可以在`chat_interface.py`中修改`SYSTEM_PROMPTS`字典來自定義不同的專家模式
