@@ -16,17 +16,17 @@
 - 建議至少16GB GPU RAM
   
 準備文件
-- 在`document_processor.py`的input_dir(自訂)目錄下創建以下子目錄：
+- 在`document_processor.py`的input_dir(自訂)目錄下創建以下子目錄，將相應的PDF文件放入對應目錄：
     - house_contract（房屋契約）
     - vehicle（車輛買賣/租賃）
     - labor（勞動契約）
     - loan（借貸契約）
     - service（服務契約）
     - real_estate（不動產）
-將相應的PDF文件放入對應目錄
+
 
 系統提示詞
-可以在`chat_interface.py`中修改`SYSTEM_PROMPTS`字典來自定義不同的專家模式。
+可以在`chat_interface.py`中修改`SYSTEM_PROMPTS`字典來自定義不同的專家模式
 
 RAG配置
 可以在`rag_processor.py`中調整以下參數：
